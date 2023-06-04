@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This test makes sure that a separate repository can import the flatbuffers
-# repository and use it in their C++ code.
+# repository and use it in their code.
 
 # --- begin runfiles.bash initialization v3 ---
 # Copy-pasted from the Bazel Bash runfiles library v3.
