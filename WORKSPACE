@@ -127,9 +127,11 @@ nodejs_register_toolchains(
 #    root_package = "ts",
 #)
 
-load("//ts:repositories.bzl", "flatbuffers_npm_repositories")
+load("@com_github_google_flatbuffers//ts:repositories.bzl", "flatbuffers_npm_repositories")
 
-flatbuffers_npm_repositories()
+flatbuffers_npm_repositories(
+    name = "flatbuffers_npm",
+)
 
 load("@flatbuffers_npm//:repositories.bzl", "npm_repositories")
 
