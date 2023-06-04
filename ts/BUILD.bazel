@@ -17,12 +17,6 @@ filegroup(
 
 npm_link_all_packages(name = "node_modules")
 
-#npm_link_package(
-#    name = "node_modules/flatbuffers",
-#    root_package = "ts",
-#    src = "//ts:flatbuffers",
-#)
-
 # Add an index to emulate the top-level package.json's "main" entry.
 genrule(
     name = "generate_index.ts",

@@ -88,7 +88,7 @@ load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
 
 rules_js_dependencies()
 
-load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock", "pnpm_repository")
+load("@aspect_rules_js//npm:npm_import.bzl", "pnpm_repository")
 
 pnpm_repository(name = "pnpm")
 
@@ -115,17 +115,6 @@ nodejs_register_toolchains(
     name = "nodejs",
     node_version = DEFAULT_NODE_VERSION,
 )
-
-#npm_translate_lock(
-#    name = "npm",
-#    npmrc = "//:.npmrc",
-#    pnpm_lock = "//:pnpm-lock.yaml",
-#    # Set this to True when the lock file needs to be updated, commit the
-#    # changes, then set to False again.
-#    update_pnpm_lock = False,
-#    verify_node_modules_ignored = "//:.bazelignore",
-#    root_package = "ts",
-#)
 
 load("@com_github_google_flatbuffers//ts:repositories.bzl", "flatbuffers_npm_repositories")
 
