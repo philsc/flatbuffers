@@ -28,9 +28,13 @@ config_setting(
 filegroup(
     name = "distribution",
     srcs = [
+        ".bazelignore",
+        ".npmrc",
         "BUILD.bazel",
         "WORKSPACE",
         "build_defs.bzl",
+        "package.json",
+        "pnpm-lock.yaml",
         "typescript.bzl",
         "//grpc/src/compiler:distribution",
         "//reflection:distribution",

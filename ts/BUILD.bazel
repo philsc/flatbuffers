@@ -8,6 +8,7 @@ filegroup(
     srcs = [
         "BUILD.bazel",
         "compile_flat_file.sh",
+        "repositories.bzl",
     ] + glob([
         "*.ts",
     ]),
