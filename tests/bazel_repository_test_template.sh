@@ -24,6 +24,6 @@ fi
 
 export PATH="$(dirname "${BAZEL_BIN}"):${PATH}"
 
-cd tests/bazel_repository_test_dir/
+cd {{REPOSITORY_DIR}}
 
 bazel test //...

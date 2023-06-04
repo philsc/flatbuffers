@@ -1,8 +1,13 @@
 load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 load("@rules_cc//cc:defs.bzl", "cc_test")
 load("//:build_defs.bzl", "DEFAULT_FLATC_ARGS", "flatbuffer_cc_library")
+load(":defs.bzl", "flatbuffers_as_external_repo_test")
 
 package(default_visibility = ["//visibility:private"])
+
+exports_files([
+    "bazel_repository_test_template.sh",
+])
 
 # rules_js works around various JS tooling limitations by copying everything
 # into the output directory. Make the test data available to the tests this way.
@@ -265,29 +270,7 @@ flatbuffer_cc_library(
     srcs = ["alignment_test.fbs"],
 )
 
-sh_test(
+flatbuffers_as_external_repo_test(
     name = "bazel_repository_test",
-    srcs = ["bazel_repository_test.sh"],
-    data = [
-        "//:distribution",
-        "@bazel_linux_x86_64//file",
-    ] + glob(
-        [
-            "bazel_repository_test_dir/**/*",
-        ],
-        exclude = [
-            "bazel_repository_test_dir/bazel-*/**",
-        ],
-    ),
-    tags = [
-        # Since we have bazel downloading external repositories inside this
-        # test, we need to give it access to the internet.
-        "requires-network",
-    ],
-    # We only have x86_64 Linux bazel exposed so restrict the test to that.
-    target_compatible_with = [
-        "@platforms//cpu:x86_64",
-        "@platforms//os:linux",
-    ],
-    deps = ["@bazel_tools//tools/bash/runfiles"],
+    directory = "bazel_repository_test_dir",
 )

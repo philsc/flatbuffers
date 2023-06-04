@@ -1,6 +1,7 @@
 load("@aspect_rules_js//js:defs.bzl", "js_test")
-load("//:typescript.bzl", "flatbuffer_ts_library")
 load("@aspect_rules_js//npm:defs.bzl", "npm_link_package")
+load("//:typescript.bzl", "flatbuffer_ts_library")
+load("//tests:defs.bzl", "flatbuffers_as_external_repo_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -60,29 +61,7 @@ TEST_COMPLEX_ARRAYS_DATA = glob([
     ("JavaScriptComplexArraysTest", TEST_COMPLEX_ARRAYS_DATA),
 )]
 
-sh_test(
+flatbuffers_as_external_repo_test(
     name = "bazel_repository_test",
-    srcs = ["bazel_repository_test.sh"],
-    data = [
-        "//:distribution",
-        "@bazel_linux_x86_64//file",
-    ] + glob(
-        [
-            "bazel_repository_test_dir/**/*",
-        ],
-        exclude = [
-            "bazel_repository_test_dir/bazel-*/**",
-        ],
-    ),
-    tags = [
-        # Since we have bazel downloading external repositories inside this
-        # test, we need to give it access to the internet.
-        "requires-network",
-    ],
-    # We only have x86_64 Linux bazel exposed so restrict the test to that.
-    target_compatible_with = [
-        "@platforms//cpu:x86_64",
-        "@platforms//os:linux",
-    ],
-    deps = ["@bazel_tools//tools/bash/runfiles"],
+    directory = "bazel_repository_test_dir",
 )
