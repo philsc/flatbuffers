@@ -18,8 +18,8 @@ filegroup(
 
 #npm_link_package(
 #    name = "node_modules/flatbuffers",
-#    #root_package = "ts",
-#    src = ":flatbuffers",
+#    root_package = "ts",
+#    src = "//ts:flatbuffers",
 #)
 
 # Add an index to emulate the top-level package.json's "main" entry.
@@ -52,7 +52,7 @@ ts_project(
                 "ES2020.BigInt",
                 "DOM",
             ],
-            "types": ["node"],
+            #"types": ["node"],
             "strict": True,
         },
     },
