@@ -15,7 +15,7 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-#npm_link_all_packages(name = "node_modules")
+npm_link_all_packages(name = "node_modules")
 
 #npm_link_package(
 #    name = "node_modules/flatbuffers",
@@ -59,9 +59,8 @@ ts_project(
     },
     visibility = ["//visibility:public"],
     deps = [
-        "@flatbuffers_npm//:node_modules/@types/node",
+        ":node_modules/@types/node",
     ],
-    supports_workers = False,
 )
 
 npm_package(
