@@ -53,16 +53,15 @@ ts_project(
                 "ES2020.BigInt",
                 "DOM",
             ],
-            #"types": ["node"],
+            "types": ["node"],
             "strict": True,
         },
     },
     visibility = ["//visibility:public"],
     deps = [
-        # Because the main repository instantiates the @npm repository, we need
-        # to depend on the main repository's node import.
         "@flatbuffers_npm//:node_modules/@types/node",
     ],
+    supports_workers = False,
 )
 
 npm_package(
