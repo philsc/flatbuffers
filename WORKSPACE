@@ -124,6 +124,7 @@ npm_translate_lock(
     # changes, then set to False again.
     update_pnpm_lock = False,
     verify_node_modules_ignored = "//:.bazelignore",
+    root_package = "ts",
 )
 
 load("@npm//:repositories.bzl", "npm_repositories")

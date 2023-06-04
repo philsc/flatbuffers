@@ -1,7 +1,17 @@
 load("@aspect_rules_js//js:defs.bzl", "js_test")
 load("//:typescript.bzl", "flatbuffer_ts_library")
+load("@aspect_rules_js//npm:defs.bzl", "npm_link_package")
 
 package(default_visibility = ["//visibility:private"])
+
+# This is a copy of //ts:node_modules/flatbuffers. The rules_js-based tests
+# require this target to live in the same or a parent package. Since we don't
+# want to put rules_js targets in the root package, we create a copy here.
+npm_link_package(
+    name = "node_modules/flatbuffers",
+    root_package = "tests/ts",
+    src = "//ts:flatbuffers",
+)
 
 flatbuffer_ts_library(
     name = "typescript_ts_fbs",
@@ -37,7 +47,7 @@ TEST_COMPLEX_ARRAYS_DATA = glob([
     chdir = package_name(),
     data = data + [
         "package.json",
-        "//:node_modules/flatbuffers",
+        ":node_modules/flatbuffers",
         "//tests:test_data_copied_to_bin",
     ],
     entry_point = "%s.js" % test,
