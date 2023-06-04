@@ -116,18 +116,22 @@ nodejs_register_toolchains(
     node_version = DEFAULT_NODE_VERSION,
 )
 
-npm_translate_lock(
-    name = "npm",
-    npmrc = "//:.npmrc",
-    pnpm_lock = "//:pnpm-lock.yaml",
-    # Set this to True when the lock file needs to be updated, commit the
-    # changes, then set to False again.
-    update_pnpm_lock = False,
-    verify_node_modules_ignored = "//:.bazelignore",
-    root_package = "ts",
-)
+#npm_translate_lock(
+#    name = "npm",
+#    npmrc = "//:.npmrc",
+#    pnpm_lock = "//:pnpm-lock.yaml",
+#    # Set this to True when the lock file needs to be updated, commit the
+#    # changes, then set to False again.
+#    update_pnpm_lock = False,
+#    verify_node_modules_ignored = "//:.bazelignore",
+#    root_package = "ts",
+#)
 
-load("@npm//:repositories.bzl", "npm_repositories")
+load("//ts:repositories.bzl", "flatbuffers_npm_repositories")
+
+flatbuffers_npm_repositories()
+
+load("@flatbuffers_npm//:repositories.bzl", "npm_repositories")
 
 npm_repositories()
 
